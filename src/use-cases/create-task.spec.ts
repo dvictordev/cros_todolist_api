@@ -21,7 +21,7 @@ describe("Register Use Case", () => {
       password: "123456",
     });
 
-    const task = await createTaskUseCase.execute({
+    const { task } = await createTaskUseCase.execute({
       status: false,
       title: "fazer teste crosoften",
       userId: user.id,

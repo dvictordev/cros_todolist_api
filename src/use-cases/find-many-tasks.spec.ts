@@ -36,7 +36,7 @@ describe("Register Use Case", () => {
       description: "não esquecer",
     });
 
-    const tasks = await findManyTasksUseCase.execute({ userId: user.id });
+    const { tasks } = await findManyTasksUseCase.execute({ userId: user.id });
 
     expect(tasks).toHaveLength(2);
   });

@@ -1,0 +1,28 @@
+services:
+  cros_api:
+    container_name: cros_todo_api
+    image: node:20
+    working_dir: /usr/src/app/
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - DATABASE_URL=mysql://admin:admin@cros_todo_db:3306/test_cros
+    ports:
+      - "3333:3333"
+    depends_on:
+      - cros_todo_db
+    command: bash -c "npm install && npx prisma migrate dev && npm run dev"
+
+  cros_todo_db:
+    container_name: cros_todo_db
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: test_cros
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    volumes:
+      - ./data/db:/var/lib/mysql
+    ports:
+      - "3306:3306"

@@ -1,0 +1,27 @@
+{
+  "name": "cros_todolist_api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx watch src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.5.4",
+    "tsup": "^8.2.4",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.2",
+    "vitest": "^2.0.5"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "cros_todolist_api": "file:",
+    "dotenv": "^16.4.5",
+    "express": "^4.20.0",
+    "zod": "^3.23.8"
+  }
+}

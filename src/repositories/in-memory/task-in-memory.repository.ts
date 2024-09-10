@@ -1,4 +1,4 @@
-import { Task } from "@prisma/client";
+import { Prisma, Task } from "@prisma/client";
 import { randomUUID } from "node:crypto";
 import { TaskRepositoryInterface } from "../task-interface.repository";
 import { CreateTaskUseCaseRequest } from "../../use-cases/create-task";
@@ -28,5 +28,38 @@ export class InMemoryTaskRepository implements TaskRepositoryInterface {
     const tasks = this.items.filter((item) => item.userId === userId);
 
     return tasks;
+  }
+
+  async updateTask(
+    taskId: string,
+    data: Prisma.TaskUpdateInput
+  ): Promise<Task> {
+    // Encontre o índice da tarefa que precisa ser atualizada
+    const taskIndex = this.items.findIndex((item) => item.id === taskId);
+
+    // Filtra os dados fornecidos para obter apenas valores primitivos
+    const updatedData: Task = {
+      id: typeof data.id === "string" ? data.id : this.items[taskIndex].id,
+      title:
+        typeof data.title === "string"
+          ? data.title
+          : this.items[taskIndex].title,
+      description: data.description
+        ? this.items[taskIndex].description
+        : this.items[taskIndex].description,
+      status:
+        typeof data.status === "boolean"
+          ? data.status
+          : this.items[taskIndex].status,
+      userId: this.items[taskIndex].userId,
+    };
+
+    // Atualize a tarefa com os dados fornecidos
+    const updatedTask = { ...this.items[taskIndex], ...updatedData };
+
+    // Substitua a tarefa antiga pela tarefa atualizada
+    this.items[taskIndex] = updatedTask;
+
+    return updatedTask;
   }
 }

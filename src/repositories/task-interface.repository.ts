@@ -4,4 +4,5 @@ import { CreateTaskUseCaseRequest } from "../use-cases/create-task";
 export interface TaskRepositoryInterface {
   create(data: CreateTaskUseCaseRequest): Promise<Task>;
   findManyByUseId(userId: string): Promise<Task[]>;
+  updateTask(taskId: string, data: Prisma.TaskUpdateInput): Promise<Task>;
 }

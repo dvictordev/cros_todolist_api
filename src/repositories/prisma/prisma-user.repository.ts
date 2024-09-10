@@ -1,12 +1,9 @@
-import { RegisterUseCaseProps } from "@/use-cases/register";
-import { User } from "@prisma/client";
-import { UsersRepositoryInterface } from "../user-interface.repository";
+import { Task } from "@prisma/client";
+import { CreateTaskUseCaseRequest } from "../../use-cases/create-task";
+import { TaskRepositoryInterface } from "../task-interface.repository";
 
-export class PrismaUserRepository implements UsersRepositoryInterface {
-  create(data: RegisterUseCaseProps): Promise<User> {
-    throw new Error("Method not implemented.");
-  }
-  findByEmail(email: string): Promise<User | null> {
+export class PrismaUserRepository implements TaskRepositoryInterface {
+  create(data: CreateTaskUseCaseRequest): Promise<Task> {
     throw new Error("Method not implemented.");
   }
 }

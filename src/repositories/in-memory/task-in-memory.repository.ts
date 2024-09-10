@@ -1,4 +1,4 @@
-import { Prisma, Task, User } from "@prisma/client";
+import { Task } from "@prisma/client";
 import { randomUUID } from "node:crypto";
 import { TaskRepositoryInterface } from "../task-interface.repository";
 import { CreateTaskUseCaseRequest } from "../../use-cases/create-task";
@@ -22,5 +22,11 @@ export class InMemoryTaskRepository implements TaskRepositoryInterface {
     this.items.push(task);
 
     return task;
+  }
+
+  async findManyByUseId(userId: string): Promise<Task[]> {
+    const tasks = this.items.filter((item) => item.userId === userId);
+
+    return tasks;
   }
 }

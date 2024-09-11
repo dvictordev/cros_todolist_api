@@ -6,6 +6,7 @@ export interface CreateTaskUseCaseRequest {
   description?: string;
   status: boolean;
   userId: string;
+  mainTask?: string;
 }
 
 interface CreateTaskUseCaseResponse {
@@ -20,12 +21,14 @@ export class CreateTaskUseCase {
     title,
     userId,
     description,
+    mainTask,
   }: CreateTaskUseCaseRequest): Promise<CreateTaskUseCaseResponse> {
     const task = await this.taskRepository.create({
       status,
       title,
       userId,
       description,
+      mainTask,
     });
 
     return { task };

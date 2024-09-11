@@ -10,6 +10,7 @@ export class InMemoryTaskRepository implements TaskRepositoryInterface {
     title,
     userId,
     description,
+    mainTask,
   }: CreateTaskUseCaseRequest): Promise<Task> {
     const task: Task = {
       id: randomUUID(),
@@ -17,6 +18,8 @@ export class InMemoryTaskRepository implements TaskRepositoryInterface {
       status,
       description: description ? description : null,
       userId,
+      mainTask: mainTask ? mainTask : null,
+      createdAt: new Date(),
     };
 
     this.items.push(task);
@@ -32,14 +35,14 @@ export class InMemoryTaskRepository implements TaskRepositoryInterface {
 
   async updateTask(
     taskId: string,
-    data: Prisma.TaskUpdateInput
+    data: CreateTaskUseCaseRequest
   ): Promise<Task> {
     // Encontre o índice da tarefa que precisa ser atualizada
     const taskIndex = this.items.findIndex((item) => item.id === taskId);
 
     // Filtra os dados fornecidos para obter apenas valores primitivos
     const updatedData: Task = {
-      id: typeof data.id === "string" ? data.id : this.items[taskIndex].id,
+      id: taskId,
       title:
         typeof data.title === "string"
           ? data.title
@@ -52,6 +55,8 @@ export class InMemoryTaskRepository implements TaskRepositoryInterface {
           ? data.status
           : this.items[taskIndex].status,
       userId: this.items[taskIndex].userId,
+      createdAt: this.items[taskIndex].createdAt,
+      mainTask: data.mainTask ? data.mainTask : this.items[taskIndex].mainTask,
     };
 
     // Atualize a tarefa com os dados fornecidos

@@ -62,4 +62,20 @@ export class InMemoryTaskRepository implements TaskRepositoryInterface {
 
     return updatedTask;
   }
+
+  async deleteTask(taskId: string): Promise<string> {
+    this.items = this.items.filter((item) => item.id !== taskId);
+
+    return "Task deletada com sucesso";
+  }
+
+  async findById(taskId: string): Promise<Task | null> {
+    const task = this.items.find((item) => item.id === taskId);
+
+    if (!task) {
+      return null;
+    }
+
+    return task;
+  }
 }

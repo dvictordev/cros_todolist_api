@@ -15,7 +15,7 @@ describe("Register Use Case", () => {
     findManyTasksUseCase = new FindManyTaskUsecase(taskRepository);
   });
 
-  it("should be able to register a user", async () => {
+  it("should be able to find all tasks by user", async () => {
     const user = await inMemoryUserRepository.create({
       name: "victor",
       email: "example@email.com",

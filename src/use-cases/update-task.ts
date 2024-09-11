@@ -1,5 +1,6 @@
 import { Task } from "@prisma/client";
 import { TaskRepositoryInterface } from "../repositories/task-interface.repository";
+import { TaskNotExistsError } from "./errors/task-not-exists-error";
 
 export interface UpdateTaskUseCaseRequest {
   taskId: string;
@@ -21,6 +22,11 @@ export class UpdateTaskUseCase {
     taskId,
     data,
   }: UpdateTaskUseCaseRequest): Promise<UpdateTaskUseCaseResponse> {
+    const existTask = await this.taskRepository.findById(taskId);
+
+    if (!existTask) {
+      throw new TaskNotExistsError();
+    }
     const task = await this.taskRepository.updateTask(taskId, data);
 
     return { task };

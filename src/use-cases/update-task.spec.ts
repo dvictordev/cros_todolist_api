@@ -4,6 +4,7 @@ import { CreateTaskUseCase } from "./create-task";
 import { InMemoryUserRepository } from "../repositories/in-memory/user-in-memory.repository";
 import { FindManyTaskUsecase } from "./find-many-tasks";
 import { UpdateTaskUseCase } from "./update-task";
+import { TaskNotExistsError } from "./errors/task-not-exists-error";
 
 let inMemoryUserRepository: InMemoryUserRepository;
 let taskRepository: InMemoryTaskRepository;
@@ -16,7 +17,7 @@ describe("Register Use Case", () => {
     updateTaskUseCase = new UpdateTaskUseCase(taskRepository);
   });
 
-  it("should be able to register a user", async () => {
+  it("should be able to update a task", async () => {
     const user = await inMemoryUserRepository.create({
       name: "victor",
       email: "example@email.com",
@@ -39,9 +40,26 @@ describe("Register Use Case", () => {
       },
     });
 
-    console.log(task);
-
     expect(task.title).toEqual("finalizar teste crosoften");
     expect(task.status).toEqual(true);
+  });
+
+  it("should not be able to update a task that does not exist", async () => {
+    const user = await inMemoryUserRepository.create({
+      name: "victor",
+      email: "example@email.com",
+      password: "123456",
+    });
+
+    await expect(() =>
+      updateTaskUseCase.execute({
+        taskId: "not existent task",
+        data: {
+          status: true,
+          title: "finalizar teste crosoften",
+          description: "não esquecer os teste unitarios",
+        },
+      })
+    ).rejects.toBeInstanceOf(TaskNotExistsError);
   });
 });

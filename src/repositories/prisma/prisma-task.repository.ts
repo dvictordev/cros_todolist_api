@@ -1,24 +1,67 @@
 import { Prisma, Task } from "@prisma/client";
 import { CreateTaskUseCaseRequest } from "../../use-cases/create-task";
 import { TaskRepositoryInterface } from "../task-interface.repository";
+import { prisma } from "../../lib/prisma";
 
 export class PrismaTaskRepository implements TaskRepositoryInterface {
-  findById(taskId: string): Promise<Task | null> {
-    throw new Error("Method not implemented.");
+  async findByStatus(userId: string, status: boolean): Promise<Task[]> {
+    const tasks = await prisma.task.findMany({
+      where: {
+        userId,
+        status,
+      },
+    });
+
+    return tasks;
   }
-  findTaskById(taskId: string): Promise<Task | null> {
-    throw new Error("Method not implemented.");
+  async findById(taskId: string): Promise<Task | null> {
+    const task = await prisma.task.findUnique({
+      where: {
+        id: taskId,
+      },
+    });
+
+    return task;
   }
-  findManyByUseId(userId: string): Promise<Task[]> {
-    throw new Error("Method not implemented.");
+
+  async findManyByUseId(userId: string): Promise<Task[]> {
+    const tasks = await prisma.task.findMany({
+      where: {
+        userId,
+      },
+    });
+
+    return tasks;
   }
-  updateTask(taskId: string, data: Prisma.TaskUpdateInput): Promise<Task> {
-    throw new Error("Method not implemented.");
+  async updateTask(
+    taskId: string,
+    data: Prisma.TaskUpdateInput
+  ): Promise<Task> {
+    const updatedTask = await prisma.task.update({
+      where: {
+        id: taskId,
+      },
+      data: {
+        ...data,
+      },
+    });
+
+    return updatedTask;
   }
-  deleteTask(taskId: string): Promise<string> {
-    throw new Error("Method not implemented.");
+  async deleteTask(taskId: string): Promise<Task> {
+    const deletedTask = await prisma.task.delete({
+      where: {
+        id: taskId,
+      },
+    });
+
+    return deletedTask;
   }
-  create(data: CreateTaskUseCaseRequest): Promise<Task> {
-    throw new Error("Method not implemented.");
+  async create(data: CreateTaskUseCaseRequest): Promise<Task> {
+    const task = await prisma.task.create({
+      data,
+    });
+
+    return task;
   }
 }

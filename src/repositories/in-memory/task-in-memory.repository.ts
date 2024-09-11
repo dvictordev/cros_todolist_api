@@ -63,10 +63,16 @@ export class InMemoryTaskRepository implements TaskRepositoryInterface {
     return updatedTask;
   }
 
-  async deleteTask(taskId: string): Promise<string> {
+  async deleteTask(taskId: string): Promise<Task | null> {
+    const task = this.items.find((item) => item.id === taskId);
+
+    if (!task) {
+      return null;
+    }
+
     this.items = this.items.filter((item) => item.id !== taskId);
 
-    return "Task deletada com sucesso";
+    return task;
   }
 
   async findById(taskId: string): Promise<Task | null> {
@@ -77,5 +83,13 @@ export class InMemoryTaskRepository implements TaskRepositoryInterface {
     }
 
     return task;
+  }
+
+  async findByStatus(userId: string, status: boolean): Promise<Task[]> {
+    const tasks = this.items.filter(
+      (item) => item.userId === userId && item.status === status
+    );
+
+    return tasks;
   }
 }

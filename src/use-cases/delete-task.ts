@@ -1,3 +1,4 @@
+import { Task } from "@prisma/client";
 import { TaskRepositoryInterface } from "../repositories/task-interface.repository";
 import { TaskNotExistsError } from "./errors/task-not-exists-error";
 
@@ -6,7 +7,7 @@ export interface DeleteTaskUseCaseRequest {
 }
 
 interface DeleteTaskUseCaseResponse {
-  response: string;
+  task: Task | null;
 }
 
 export class DeleteTaskUseCase {
@@ -23,6 +24,6 @@ export class DeleteTaskUseCase {
 
     const task = await this.taskRepository.deleteTask(taskId);
 
-    return { response: task };
+    return { task };
   }
 }

@@ -14,6 +14,7 @@
   "description": "",
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^22.5.4",
     "@types/supertest": "^6.0.2",
     "prisma": "^5.19.1",
@@ -30,6 +31,7 @@
     "cros_todolist_api": "file:",
     "dotenv": "^16.4.5",
     "express": "^4.20.0",
+    "jsonwebtoken": "^9.0.2",
     "zod": "^3.23.8"
   }
 }

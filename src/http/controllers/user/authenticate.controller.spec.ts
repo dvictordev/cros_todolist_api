@@ -2,8 +2,9 @@ import request from "supertest";
 import { beforeEach, describe, expect, it } from "vitest";
 import { app } from "../../../app";
 import { prisma } from "../../../lib/prisma";
+import { hash } from "bcryptjs";
 
-describe("Register (e2e)", () => {
+describe("Authenticate (e2e)", () => {
   beforeEach(async () => {
     try {
       await prisma.$transaction([
@@ -15,11 +16,21 @@ describe("Register (e2e)", () => {
     }
   });
   it("should be able to register", async () => {
-    const response = await request(app).post("/user").send({
-      name: "1123",
-      email: "teste@gmail.com",
-      password: "12345",
+    await prisma.user.create({
+      data: {
+        name: "john doe",
+        email: "johndoe@example.com",
+        password: await hash("123456", 6),
+      },
     });
-    expect(response.status).toEqual(201);
+
+    const authResponse = await request(app).post("/login").send({
+      email: "johndoe@example.com",
+      password: "123456",
+    });
+
+    const { token } = authResponse.body;
+
+    expect(token).toEqual(expect.any(String));
   });
 });

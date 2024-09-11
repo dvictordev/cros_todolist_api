@@ -1,20 +1,17 @@
 import { Request, Response } from "express";
 import { z, ZodError } from "zod";
-import { makeRegisterUseCase } from "../../../use-cases/factories/make-register-use-case";
 import { UserAlreadyExistsError } from "../../../use-cases/errors/user-already-exists-error";
+import { makeFindManyTaskUseCase } from "../../../use-cases/factories/make-find-many-task-use-case";
 
-export class RegisterController {
-  async register(req: Request, res: Response) {
+export class FindManyTaskController {
+  async execute(req: Request, res: Response) {
     try {
-      const registerBodySchema = z.object({
-        name: z.string(),
-        email: z.string().email(),
-        password: z.string(),
-      });
-      const { email, name, password } = registerBodySchema.parse(req.body);
-      const registerUseCase = makeRegisterUseCase();
-      const response = await registerUseCase.execute({ name, email, password });
-      return res.status(201).send();
+      const userId: any = req.headers.sub;
+
+      const createTaskUseCase = makeFindManyTaskUseCase();
+      const response = await createTaskUseCase.execute({ userId });
+
+      return res.status(200).send(response);
     } catch (error) {
       if (error instanceof ZodError) {
         return res.status(400).send({
@@ -28,7 +25,6 @@ export class RegisterController {
           error_description: error.message,
         });
       }
-
       return res.send(error);
     }
   }

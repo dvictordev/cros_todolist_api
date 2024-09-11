@@ -11,6 +11,7 @@ export class InMemoryUserRepository implements UsersRepositoryInterface {
       email: data.email,
       name: data.name,
       password: data.password,
+      createdAt: new Date(),
     };
 
     this.items.push(user);

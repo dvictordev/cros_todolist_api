@@ -55,8 +55,6 @@ describe("Register Use Case", () => {
       mainTask: response.task.id,
     });
 
-    console.log(task);
-
     expect(task.id).toEqual(expect.any(String));
     expect(task.title).toEqual("fazer teste crosoften");
     expect(task.userId).toEqual(user.id);

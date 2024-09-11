@@ -1,9 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { InMemoryTaskRepository } from "../repositories/in-memory/task-in-memory.repository";
-import { CreateTaskUseCase } from "./create-task";
 import { InMemoryUserRepository } from "../repositories/in-memory/user-in-memory.repository";
-import { FindManyTaskUsecase } from "./find-many-tasks";
-import { UpdateTaskUseCase } from "./update-task";
 import { DeleteTaskUseCase } from "./delete-task";
 import { TaskNotExistsError } from "./errors/task-not-exists-error";
 
@@ -32,9 +29,9 @@ describe("Register Use Case", () => {
       description: "não esquecer",
     });
 
-    const { task } = await deleteTaskUseCase.execute({ taskId: id });
+    const { message } = await deleteTaskUseCase.execute({ taskId: id });
 
-    expect(task?.id).toEqual(id);
+    expect(message).toEqual("Task deleted successfully");
   });
 
   it("should not be able to delete a task that does not exist", async () => {

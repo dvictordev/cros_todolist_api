@@ -1,6 +1,4 @@
-import { Task, User } from "@prisma/client";
-import { CreateTaskUseCaseRequest } from "../../use-cases/create-task";
-import { TaskRepositoryInterface } from "../task-interface.repository";
+import { User } from "@prisma/client";
 import { UsersRepositoryInterface } from "../user-interface.repository";
 import { RegisterUseCaseProps } from "../../use-cases/register";
 import { prisma } from "../../lib/prisma";

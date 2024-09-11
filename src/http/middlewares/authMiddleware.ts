@@ -1,6 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
-import { env } from "../../env";
 import { RequestHandler } from "express-serve-static-core";
 import { JWTService } from "./JWTService";
 

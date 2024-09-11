@@ -5,36 +5,43 @@ import { prisma } from "../../../lib/prisma";
 import { hash } from "bcryptjs";
 import resetDb from "../../test/helper/reset-db";
 
-describe("Create task (e2e)", () => {
+describe("Delete task (e2e)", () => {
   afterAll(async () => {
     await resetDb();
   });
 
-  it("should be able to create a task", async () => {
-    await prisma.user.create({
+  it("should be able to delete a task", async () => {
+    const user = await prisma.user.create({
       data: {
         name: "first task",
-        email: "test-create@example.com",
+        email: "test-delete@example.com",
         password: await hash("123456", 6),
       },
     });
 
     const authResponse = await request(app).post("/login").send({
-      email: "test-create@example.com",
+      email: "test-delete@example.com",
       password: "123456",
     });
 
     const { token } = authResponse.body;
 
-    const { body, status } = await request(app)
-      .post("/task")
+    const task = await prisma.task.create({
+      data: {
+        status: false,
+        title: "teste",
+        userId: user.id,
+      },
+    });
+
+    const deleteResponse = await request(app)
+      .delete(`/task`)
       .set("Authorization", `Bearer ${token}`)
       .send({
-        status: false,
-        title: "Criar testes end to end",
-        description: "Criar teste end to end para a crosoften",
+        taskId: task.id,
       });
 
-    expect(status).toEqual(201);
+    expect(deleteResponse.status).toEqual(201);
+    expect(deleteResponse.body.message).toEqual("Task deleted successfully");
   });
 });

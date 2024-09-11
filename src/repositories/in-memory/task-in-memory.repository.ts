@@ -1,4 +1,4 @@
-import { Prisma, Task } from "@prisma/client";
+import { Task } from "@prisma/client";
 import { randomUUID } from "node:crypto";
 import { TaskRepositoryInterface } from "../task-interface.repository";
 import { CreateTaskUseCaseRequest } from "../../use-cases/create-task";

@@ -1,8 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { AuthenticateUseCase } from "./authenticate";
-import { Prisma, User } from "@prisma/client";
 import { hash } from "bcryptjs";
-import { RegisterUseCase } from "./register";
 import { InMemoryUserRepository } from "../repositories/in-memory/user-in-memory.repository";
 import { InvalidCredentialError } from "./errors/invalid-credentia-error";
 

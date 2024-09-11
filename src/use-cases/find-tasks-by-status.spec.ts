@@ -1,8 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { InMemoryTaskRepository } from "../repositories/in-memory/task-in-memory.repository";
-import { CreateTaskUseCase } from "./create-task";
 import { InMemoryUserRepository } from "../repositories/in-memory/user-in-memory.repository";
-import { FindManyTaskUsecase } from "./find-many-tasks";
 import { FindByStatusUseCase } from "./find-tasks-by-status";
 
 let inMemoryUserRepository: InMemoryUserRepository;

@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from "express";
+import express from "express";
 import { userRouter } from "./http/controllers/user/user-routes";
 import { taskRouter } from "./http/controllers/task/task-routes";
 

@@ -15,7 +15,7 @@ describe("Authenticate (e2e)", () => {
       console.error("Erro ao limpar o banco de dados antes do teste:", error);
     }
   });
-  it("should be able to register", async () => {
+  it("should be able to authenticate", async () => {
     await prisma.user.create({
       data: {
         name: "john doe",

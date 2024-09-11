@@ -15,7 +15,7 @@ describe("Find many tasks task (e2e)", () => {
       console.error("Erro ao limpar o banco de dados antes do teste:", error);
     }
   });
-  it("should be able to register", async () => {
+  it("should be able to find many tasks", async () => {
     const user = await prisma.user.create({
       data: {
         name: "first task",

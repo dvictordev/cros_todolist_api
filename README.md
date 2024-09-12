@@ -1,6 +1,3 @@
-Aqui está o `README.md` atualizado com o aviso na etapa de configuração das variáveis de ambiente:
-
-````markdown
 # cros_todolist_api
 
 ## Descrição
@@ -40,10 +37,10 @@ Este projeto é uma API de lista de tarefas construída com **Node.js**, **Expre
 Siga os passos abaixo para rodar o projeto corretamente:
 
 1. **Instale as dependências**:
+
    ```bash
    npm install
    ```
-````
 
 2. **Suba o container Docker com o banco de dados**:
 
@@ -101,4 +98,5 @@ A aplicação estará disponível em `http://localhost:3000`.
 DATABASE_URL="URL TO DATABASE"
 JWT_SECRET="here goes your JWT_SECRET"
 PORT="PORT TO RUN THE LOCAL SERVER"
+
 ```

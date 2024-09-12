@@ -100,3 +100,5 @@ JWT_SECRET="here goes your JWT_SECRET"
 PORT="PORT TO RUN THE LOCAL SERVER"
 
 ```
+
+> **Observaçao:** Os teste de integração estão gerando um erro, acredito que causado pelo prisma, como foi feito com um banco MySQL eu não soube resolver mas com um banco PostgreSQL eu utilizar environment de testes, porém diretamente pelo insomnia esta funcionando corretamente

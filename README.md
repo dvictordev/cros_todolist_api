@@ -4,6 +4,10 @@
 
 Este projeto é uma API de lista de tarefas construída com **Node.js**, **Express**, **Prisma** e **MySQL**. Ele suporta autenticação JWT, criptografia de senhas com **bcryptjs** e testes com **Vitest**. O projeto segue uma estrutura organizada com uso de TypeScript, visando a criação de uma API robusta e escalável.
 
+## Documentção
+
+Ao rodar o projeto a documentação estara acessivel em http://localhost:<PORT>/api-docs
+
 ## Estrutura de Arquivos
 
 - `src/`: Contém todo o código-fonte da aplicação.

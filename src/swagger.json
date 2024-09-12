@@ -5,8 +5,8 @@
     "title": "Todolist API",
     "description": "API developed as a test for the backend developer position at Crosoften"
   },
-  "host": "api.example.com",
-  "basePath": "/v1",
+  "host": "http://localhost:3333/",
+  "basePath": "/api-docs",
   "schemes": ["https"],
   "components": {
     "securitySchemes": {
@@ -21,7 +21,7 @@
     "/user": {
       "post": {
         "summary": "Register a new user",
-        "description": "Creates a new user with the provided information",
+        "description": "Cria um novo usuário com as informações fornecidas",
         "parameters": [
           {
             "in": "body",
@@ -43,7 +43,7 @@
     "/login": {
       "post": {
         "summary": "Authenticate user",
-        "description": "Authenticates a user with the provided credentials",
+        "description": "Autentica um usuário com as credenciais fornecidas e retorna um JWT",
         "parameters": [
           {
             "in": "body",
@@ -65,7 +65,7 @@
     "/task": {
       "post": {
         "summary": "Create a new task",
-        "description": "Creates a new task with the provided information",
+        "description": "Cria uma nova tarefa. É necessário autenticação Bearer",
         "parameters": [
           {
             "in": "body",
@@ -90,7 +90,7 @@
       },
       "get": {
         "summary": "Get task by status",
-        "description": "Returns a task by its status",
+        "description": "Retorna uma tarefa de acordo com o status. É necessário autenticação Bearer",
         "parameters": [
           {
             "in": "body",
@@ -124,7 +124,7 @@
       },
       "delete": {
         "summary": "Delete a task",
-        "description": "Deletes a task by ID",
+        "description": "Deleta uma tarefa de acordo com o taskId enviado. É necessário autenticação Bearer",
         "parameters": [
           {
             "in": "body",
@@ -155,7 +155,7 @@
       },
       "put": {
         "summary": "Update an existing task",
-        "description": "Updates a task with the provided information",
+        "description": "Atualiza um tarefa de acordo com as informacoes enviadas. É necessário autenticação Bearer",
         "parameters": [
           {
             "in": "body",
@@ -204,7 +204,7 @@
     "/tasks": {
       "get": {
         "summary": "Get all tasks",
-        "description": "Returns a list of all tasks",
+        "description": "Retorna uma lista de tarefas. É necessário autenticação Bearer",
         "responses": {
           "200": {
             "description": "A list of tasks",

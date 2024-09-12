@@ -18,10 +18,7 @@ interface UpdateTaskUseCaseResponse {
 export class UpdateTaskUseCase {
   constructor(private taskRepository: TaskRepositoryInterface) {}
 
-  async execute({
-    taskId,
-    data,
-  }: UpdateTaskUseCaseRequest): Promise<UpdateTaskUseCaseResponse> {
+  async execute({ taskId, data }: UpdateTaskUseCaseRequest): Promise<Task> {
     const existTask = await this.taskRepository.findById(taskId);
 
     if (!existTask) {
@@ -29,6 +26,6 @@ export class UpdateTaskUseCase {
     }
     const task = await this.taskRepository.updateTask(taskId, data);
 
-    return { task };
+    return task;
   }
 }

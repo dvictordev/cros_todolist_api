@@ -10,10 +10,10 @@ export class CreateTaskController {
         status: z.boolean(),
         title: z.string(),
         description: z.string().optional(),
+        mainTaskId: z.string().optional(),
       });
-      const { status, title, description } = createTaskBodySchema.parse(
-        req.body
-      );
+      const { status, title, description, mainTaskId } =
+        createTaskBodySchema.parse(req.body);
 
       const userId: any = req.headers.sub;
 
@@ -23,6 +23,7 @@ export class CreateTaskController {
         title,
         userId: userId,
         description,
+        mainTask: mainTaskId,
       });
 
       return res.status(201).send(response);

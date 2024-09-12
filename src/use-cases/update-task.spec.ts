@@ -29,7 +29,7 @@ describe("Register Use Case", () => {
       description: "não esquecer",
     });
 
-    const { task } = await updateTaskUseCase.execute({
+    const task = await updateTaskUseCase.execute({
       taskId: oldTask.id,
       data: {
         status: true,

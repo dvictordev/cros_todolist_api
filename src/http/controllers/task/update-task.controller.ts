@@ -1,22 +1,32 @@
 import { Request, Response } from "express";
 import { z, ZodError } from "zod";
 import { UserAlreadyExistsError } from "../../../use-cases/errors/user-already-exists-error";
-import { makeCreateTaskUsecase } from "../../../use-cases/factories/make-create-task-use-case";
-import { makeDeleteTaskUseCase } from "../../../use-cases/factories/make-delete-task-use-case";
+import { makeUpdateTaskUseCase } from "../../../use-cases/factories/make-update-task-use-case";
 
-export class DeleteTaskController {
+export class UpdateTaskController {
   async execute(req: Request, res: Response) {
     try {
-      const deleteTaskBodySchema = z.object({
+      const updateTaskBodySchema = z.object({
+        status: z.boolean().optional(),
+        title: z.string().optional(),
+        description: z.string().optional(),
         taskId: z.string(),
       });
+      const { status, title, description, taskId } = updateTaskBodySchema.parse(
+        req.body
+      );
 
-      const { taskId } = deleteTaskBodySchema.parse(req.body);
+      const updateTaskUseCase = await makeUpdateTaskUseCase();
+      const response = await updateTaskUseCase.execute({
+        taskId,
+        data: {
+          status,
+          title,
+          description,
+        },
+      });
 
-      const createTaskUseCase = await makeDeleteTaskUseCase();
-      const { message } = await createTaskUseCase.execute({ taskId });
-
-      return res.status(201).send({ message });
+      return res.status(201).send(response);
     } catch (error) {
       if (error instanceof ZodError) {
         return res.status(400).send({

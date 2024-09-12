@@ -15,7 +15,7 @@ export const verifyToken: RequestHandler = (
 
   if (!authorization) {
     return res.status(401).json({
-      errors: { default: "Não autenticado" },
+      error: "Not Authorized",
     });
   }
 
@@ -23,7 +23,7 @@ export const verifyToken: RequestHandler = (
 
   if (type !== "Bearer") {
     return res.status(404).json({
-      errors: { default: "Não autenticado" },
+      error: "Not Authorized",
     });
   }
 
@@ -34,7 +34,7 @@ export const verifyToken: RequestHandler = (
     });
   } else if (jwtData === "INVALID_TOKEN") {
     return res.status(401).json({
-      errors: { default: "Não autenticado" },
+      error: "Not Authorized",
     });
   }
 

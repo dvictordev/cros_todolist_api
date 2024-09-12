@@ -7,7 +7,14 @@ import resetDb from "../../test/helper/reset-db";
 
 describe("Delete task (e2e)", () => {
   afterAll(async () => {
-    await resetDb();
+    try {
+      await prisma.$transaction([
+        prisma.task.deleteMany(),
+        prisma.user.deleteMany(),
+      ]);
+    } catch (error) {
+      console.error("Erro ao limpar o banco de dados antes do teste:", error);
+    }
   });
 
   it("should be able to delete a task", async () => {

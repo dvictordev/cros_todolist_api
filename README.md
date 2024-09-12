@@ -7,5 +7,5 @@
 - [x] O usuário pode marcar uma task específica como concluída.
 - [x] O usuário pode desmarcar uma task específica como concluída.
 - [x] O usuário pode filtrar as suas tasks pelo status (concluída ou não concluída).
-- [] Uma task pode possuir subtasks.
-- [] Uma subtask também pode ter subtasks.
+- [x] Uma task pode possuir subtasks.
+- [x] Uma subtask também pode ter subtasks.

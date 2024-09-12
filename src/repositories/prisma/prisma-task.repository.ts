@@ -37,17 +37,21 @@ export class PrismaTaskRepository implements TaskRepositoryInterface {
     taskId: string,
     data: Prisma.TaskUpdateInput
   ): Promise<Task> {
+    // filtra os campos que foram enviados para garantir que seja atualizado apenas os campos enviados
+    const filteredData = Object.fromEntries(
+      Object.entries(data).filter(([_, value]) => value !== undefined)
+    );
+
     const updatedTask = await prisma.task.update({
       where: {
         id: taskId,
       },
-      data: {
-        ...data,
-      },
+      data: filteredData,
     });
 
     return updatedTask;
   }
+
   async deleteTask(taskId: string): Promise<Task> {
     const deletedTask = await prisma.task.delete({
       where: {

@@ -3,6 +3,7 @@ import { afterAll, beforeEach, describe, expect, it } from "vitest";
 import { app } from "../../../app";
 import { prisma } from "../../../lib/prisma";
 import { hash } from "bcryptjs";
+import resetDb from "../../test/helper/reset-db";
 
 describe("Find many tasks task (e2e)", () => {
   afterAll(async () => {

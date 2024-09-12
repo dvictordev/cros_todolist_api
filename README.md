@@ -53,7 +53,7 @@ Siga os passos abaixo para rodar o projeto corretamente:
    - Crie um arquivo `.env` baseado no `.env.example`.
    - Exemplo de configuração no arquivo `.env`:
      ```dotenv
-     DATABASE_URL="mysql://root:rootpassword@cros_db:3306/teste_cros_db"
+     DATABASE_URL="mysql://user:password@cros_db:3306/teste_cros_db"
      JWT_SECRET="your-secret-key"
      PORT=3000
      ```

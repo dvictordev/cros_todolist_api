@@ -6,7 +6,7 @@ Este projeto é uma API de lista de tarefas construída com **Node.js**, **Expre
 
 ## Documentção
 
-Ao rodar o projeto a documentação estara acessivel em http://localhost:<PORT>/api-docs
+Ao rodar o projeto a documentação estara acessivel em http://localhost:{<PORT>}/api-docs
 
 ## Estrutura de Arquivos
 
